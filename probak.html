@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<body>
+
+
+  <script>
+  var team = '{"teamGryffindor" : [' +
+    '{"nombre":"Katie Bell", "posicion":"cazador", "puntos":0},' +
+    '{"nombre":"Ginny Weasly", "posicion":"cazador", "puntos":0},' +
+    '{"nombre":"Demelza Robins", "posicion":"cazador", "puntos":0},' +
+    '{"nombre":"Jimmy Peakes", "posicion":"golpeador", "puntos":0},' +
+    '{"nombre":"Ritchie Coote", "posicion":"golpeador", "puntos":0},' +
+    '{"nombre":"Ron Weasley", "posicion":"guardian", "puntos":0},' +
+    '{"nombre":"Harry Potter", "posicion":"buscador", "puntos":0}' +
+  ']}';
+
+  var equipos = JSON.parse(team);
+  console.log(equipos.teamGryffindor[4].posicion);
+  </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+var equipos = {
+  gryffindor : {
+    nombre : 'Gryffindor',
+    imagen : 'img.png',
+    jugador : {
+
+    },
+    cazador1 : ['Katie Bell', 0],
+    cazador2 : ['Ginny Weasly', 0],
+    cazador3 : ['Demelza Robins', 0],
+    golpeador1 : ['Katie Bell', 0]
+  },
+  slytherin : {
+
+  },
+  hufflepuff : {
+
+  },
+  ravenclaw : {
+
+  }
+};
