@@ -78,6 +78,6 @@ class Equipo {
 }
 
 gryffindor = new Equipo("gryffindor","gryffindor.png",jugadoresGryffindor);
-slytherin = new Equipo("gryffindor","gryffindor.png",jugadoresSlytherin);
-ravenclaw = new Equipo("gryffindor","gryffindor.png",jugadoresRavenclaw);
-hufflepuff = new Equipo("gryffindor","gryffindor.png",jugadoresHufflepuff);
+slytherin = new Equipo("slytherin","slytherin.png",jugadoresSlytherin);
+ravenclaw = new Equipo("ravenclaw","ravenclaw.png",jugadoresRavenclaw);
+hufflepuff = new Equipo("hufflepuff","hufflepuff.png",jugadoresHufflepuff);

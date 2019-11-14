@@ -26,7 +26,7 @@
     <div class="row">
       <!-- COLUMNA EQUIPO 1 -->
       <div class="col-md-3">
-        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" class="img-thumbnail">
+        <img id="crest1" src="#" class="img-thumbnail crest">
         <table class="table table-hover">
           <thead>
             <tr>
@@ -87,7 +87,7 @@
 
       <!-- COLUMNA EQUIPO 2 -->
       <div class="col-md-3">
-        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" class="img-thumbnail">
+        <img id="crest2" src="#" class="img-thumbnail crest">
         <table class="table table-hover">
           <thead>
             <tr>
@@ -97,7 +97,6 @@
             </tr>
           </thead>
           <tbody id="equipo2">
-
           </tbody>
         </table>
       </div>
@@ -124,10 +123,13 @@
         equipo = hufflepuff;
       }
 
+      //mostrar logo de equipo
+      $('#crest1').attr('src', 'img/' + equipo.imagen);
+
       //mostrar los jugadores del equipo
       for (var i = 0; i <= 7; i++) {
         let player = equipo.jugadores.jugador[i];
-        $('#equipo1').append('<tr><td>' + player.nombre + '</td><td>' + player.posicion + '</td><td>' + player.puntos + '</td><td><img class="quaffle" onClick = "gol('+player+');" src="img/quaffle.jpg"></td></tr>');
+        $('#equipo1').append('<tr><td>' + player.nombre + '</td><td>' + player.posicion + '</td><td>' + player.puntos + '</td><td><img class="quaffle" onClick = "gol('+player+');" src="img/quaffle.png"></td></tr>');
       }
     });
 
@@ -147,13 +149,18 @@
         equipo = hufflepuff;
       }
 
+      //mostrar logo de equipo
+      $('#crest2').attr('src', 'img/' + equipo.imagen);
+
       //mostrar los jugadores del equipo
       for (var i = 0; i <= 7; i++) {
         let player = equipo.jugadores.jugador[i];
-        $('#equipo2').append('<tr><td>' + player.nombre + '</td><td>' + player.posicion + '</td><td>' + player.puntos + '</td><td><img class="quaffle" onClick = "gol('+player+');" src="img/quaffle.jpg"></td></tr>');
+        $('#equipo2').append('<tr><td>' + player.nombre + '</td><td>' + player.posicion + '</td><td>' + player.puntos + '</td><td><img class="quaffle" onClick = "gol('+player+');" src="img/quaffle.png"></td></tr>');
       }
     });
   });
+
 </script>
+
 </body>
 </html>
