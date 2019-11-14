@@ -1,0 +1,13 @@
+[jokalarien informazio guztia bistaratu]
+for (var i = 0; i <= 6; i++) {
+  console.log(equipoGryffindor.jugador[i].nombre + " " + equipoGryffindor.jugador[i].posicion + " " + equipoGryffindor.jugador[i].puntos);
+}
+for (var i = 0; i <= 6; i++) {
+  console.log(equipoSlytherin.jugador[i].nombre + " " + equipoSlytherin.jugador[i].posicion + " " + equipoSlytherin.jugador[i].puntos);
+}
+for (var i = 0; i <= 6; i++) {
+  console.log(equipoRavenclaw.jugador[i].nombre + " " + equipoRavenclaw.jugador[i].posicion + " " + equipoRavenclaw.jugador[i].puntos);
+}
+for (var i = 0; i <= 6; i++) {
+  console.log(equipoHufflepuff.jugador[i].nombre + " " + equipoHufflepuff.jugador[i].posicion + " " + equipoHufflepuff.jugador[i].puntos);
+}
