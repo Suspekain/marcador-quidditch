@@ -129,7 +129,7 @@
       //mostrar los jugadores del equipo
       for (var i = 0; i <= 7; i++) {
         let player = equipo.jugadores.jugador[i];
-        $('#equipo1').append('<tr><td>' + player.nombre + '</td><td>' + player.posicion + '</td><td>' + player.puntos + '</td><td><img class="quaffle" onClick = "gol('+player+');" src="img/quaffle.png"></td></tr>');
+        $('#equipo1').append('<tr><td>' + player.nombre + '</td><td>' + player.posicion + '</td><td>' + player.puntos + '</td><td><a class="gol"><img class="quaffle" src="img/quaffle.png"></a></td></tr>');
       }
     });
 
@@ -155,12 +155,14 @@
       //mostrar los jugadores del equipo
       for (var i = 0; i <= 7; i++) {
         let player = equipo.jugadores.jugador[i];
-        $('#equipo2').append('<tr><td>' + player.nombre + '</td><td>' + player.posicion + '</td><td>' + player.puntos + '</td><td><img class="quaffle" onClick = "gol('+player+');" src="img/quaffle.png"></td></tr>');
+        $('#equipo2').append('<tr><td>' + player.nombre + '</td><td>' + player.posicion + '</td><td>' + player.puntos + '</td><td><img id="gol" class="quaffle" src="img/quaffle.png"></td></tr>');
       }
     });
+
+    $('#gol').click(function() {
+      console.log('gol');
+    });
   });
-
 </script>
-
 </body>
 </html>
