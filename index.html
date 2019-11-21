@@ -25,8 +25,8 @@
   <div class="container-fluid">
     <div class="row">
       <!-- COLUMNA EQUIPO 1 -->
-      <div class="col-md-3">
-        <img id="crest1" src="#" class="img-thumbnail crest">
+      <div id="columna1" class="col-md-3">
+        <img id="crest1" src="#" class=" crest">
         <table class="table table-hover">
           <thead>
             <tr>
@@ -65,7 +65,6 @@
           </div>
         </div>
 
-
         <h3 class="text-center">
           MARCADOR
         </h3>
@@ -85,7 +84,7 @@
 
       <!-- COLUMNA EQUIPO 2 -->
       <div class="col-md-3">
-        <img id="crest2" src="#" class="img-thumbnail crest">
+        <img id="crest2" src="#" class="crest">
         <table class="table table-hover">
           <thead>
             <tr>
@@ -110,18 +109,24 @@
     $('.seleccionEquipo').click(function() {
       //asignar a equipo el equipo seleccionado
       let equipo = $('#equipos option:selected').val();
+      var color = "";
       if (equipo == 'gryffindor') {
         equipo = gryffindor;
+        color = 'bg-danger';
       } else if (equipo == 'slytherin') {
         equipo = slytherin;
+        color = 'bg-success';
       } else if (equipo == 'ravenclaw') {
         equipo = ravenclaw;
+        color = 'bg-primary';
       } else if (equipo == 'hufflepuff') {
         equipo = hufflepuff;
+        color = 'bg-warning';
       }
 
       if (this.name === 'equipo1') {
         $('#equipo1').empty();
+        $('#columna1').addClass(color);
 
         //mostrar logo de equipo
         $('#crest1').attr('src', 'img/' + equipo.imagen);
