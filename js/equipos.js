@@ -44,37 +44,14 @@ var jugadoresRavenclaw = JSON.parse(teamR);
 var jugadoresHufflepuff = JSON.parse(teamH);
 
 class Equipo {
-  constructor(nombre,imagen,jugadores) {
-    this._nombre = nombre;
-    this._imagen = imagen;
-    this._jugadores = jugadores;
-    this._puntos = 0;
-  }
 
-  get nombre() {
-    return this._nombre;
+  constructor(nombre,imagen,jugadores) {
+    this.nombre = nombre;
+    this.imagen = imagen;
+    this.jugadores = jugadores;
+    this.puntos = 0;
   }
-  set nombre(x) {
-    this._nombre = x;
-  }
-  get imagen() {
-    return this._imagen;
-  }
-  set imagen(x) {
-    this._imagen = x;
-  }
-  get jugadores() {
-    return this._jugadores;
-  }
-  set jugadores(x) {
-    this._jugadores = x;
-  }
-  get puntos() {
-    return this._puntos;
-  }
-  set puntos(x) {
-    this._puntos = x;
-  }
+  
 }
 
 gryffindor = new Equipo("gryffindor","gryffindor.png",jugadoresGryffindor);

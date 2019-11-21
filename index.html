@@ -33,7 +33,7 @@
               <th>Nombre</th>
               <th>Puesto</th>
               <th>Puntos</th>
-              <th>GOL</th>
+              <th>Gol</th>
             </tr>
           </thead>
           <tbody id="equipo1">
@@ -79,9 +79,7 @@
         </div>
 
         <div class="btn-group" role="group">
-          <button class="btn btn-secondary" type="button">Center</button>
-          <button class="btn btn-secondary" type="button">Right</button>
-          <button class="btn btn-secondary" type="button">Justify</button>
+          <button class="gol" class="btn btn-secondary" type="button">Gol</button>
         </div>
       </div>
 
@@ -127,42 +125,48 @@
       $('#crest1').attr('src', 'img/' + equipo.imagen);
 
       //mostrar los jugadores del equipo
-      for (var i = 0; i <= 7; i++) {
-        let player = equipo.jugadores.jugador[i];
-        $('#equipo1').append('<tr><td>' + player.nombre + '</td><td>' + player.posicion + '</td><td>' + player.puntos + '</td><td><a class="gol"><img class="quaffle" src="img/quaffle.png"></a></td></tr>');
-      }
+      for (var i = 0; i <= 6; i++) {
+        var player = equipo.jugadores.jugador[i];
+        $('#equipo1').append(
+          '<tr><td>' + player.nombre +
+          '</td><td>' + player.posicion +
+          '</td><td id="' + player.id + '">' + player.puntos +
+          '</td><td><img name="' + player.id + '" class="quaffle gol" src="img/quaffle.png"></td></tr>');
+        }
+      });
+
+      //EQUIPO 2
+      $('#seleccionEquipo2').click(function() {
+        $('#equipo2').empty();
+
+        //asignar a var equipo el equipo seleccionado
+        let equipo = $('#equipos option:selected').val();
+        if (equipo == 'gryffindor') {
+          equipo = gryffindor;
+        } else if (equipo == 'slytherin') {
+          equipo = slytherin;
+        } else if (equipo == 'ravenclaw') {
+          equipo = ravenclaw;
+        } else if (equipo == 'hufflepuff') {
+          equipo = hufflepuff;
+        }
+
+        //mostrar logo de equipo
+        $('#crest2').attr('src', 'img/' + equipo.imagen);
+
+        //mostrar los jugadores del equipo
+        for (var i = 0; i <= 7; i++) {
+          let player = equipo.jugadores.jugador[i];
+          $('#equipo2').append('<tr><td>' + player.nombre + '</td><td>' + player.posicion + '</td><td>' + player.puntos + '</td><td></td></tr>');
+        }
+      });
+
+      $(document).on("click", ".gol", function(){
+        var puntos = parseInt($('#' + this.name).text()) + 10;
+        $('#' + this.name).text(puntos);
+        
+      });
     });
-
-    //EQUIPO 2
-    $('#seleccionEquipo2').click(function() {
-      $('#equipo2').empty();
-
-      //asignar a var equipo el equipo seleccionado
-      let equipo = $('#equipos option:selected').val();
-      if (equipo == 'gryffindor') {
-        equipo = gryffindor;
-      } else if (equipo == 'slytherin') {
-        equipo = slytherin;
-      } else if (equipo == 'ravenclaw') {
-        equipo = ravenclaw;
-      } else if (equipo == 'hufflepuff') {
-        equipo = hufflepuff;
-      }
-
-      //mostrar logo de equipo
-      $('#crest2').attr('src', 'img/' + equipo.imagen);
-
-      //mostrar los jugadores del equipo
-      for (var i = 0; i <= 7; i++) {
-        let player = equipo.jugadores.jugador[i];
-        $('#equipo2').append('<tr><td>' + player.nombre + '</td><td>' + player.posicion + '</td><td>' + player.puntos + '</td><td><img id="gol" class="quaffle" src="img/quaffle.png"></td></tr>');
-      }
-    });
-
-    $('#gol').click(function() {
-      console.log('gol');
-    });
-  });
-</script>
-</body>
-</html>
+    </script>
+  </body>
+  </html>
