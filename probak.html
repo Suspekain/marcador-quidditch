@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
-  <meta charset="utf-8">
-  <title></title>
-</head>
 <body>
-
-
   <script>
-  var team = '{"teamGryffindor" : [' +
-    '{"nombre":"Katie Bell", "posicion":"cazador", "puntos":0},' +
-    '{"nombre":"Ginny Weasly", "posicion":"cazador", "puntos":0},' +
-    '{"nombre":"Demelza Robins", "posicion":"cazador", "puntos":0},' +
-    '{"nombre":"Jimmy Peakes", "posicion":"golpeador", "puntos":0},' +
-    '{"nombre":"Ritchie Coote", "posicion":"golpeador", "puntos":0},' +
-    '{"nombre":"Ron Weasley", "posicion":"guardian", "puntos":0},' +
-    '{"nombre":"Harry Potter", "posicion":"buscador", "puntos":0}' +
-  ']}';
+  $(document).ready(function(){
+    animateDiv('.a');
+  });
 
-  var equipos = JSON.parse(team);
-  console.log(equipos.teamGryffindor[4].posicion);
+  function makeNewPosition(){
+
+    // Get viewport dimensions (remove the dimension of the div)
+    var h = $(window).height() - 50;
+    var w = $(window).width() - 50;
+
+    var nh = Math.floor(Math.random() * h);
+    var nw = Math.floor(Math.random() * w);
+
+    return [nh,nw];
+
+  }
+
+  function animateDiv(myclass){
+    var newq = makeNewPosition();
+    $(myclass).animate({ top: newq[0], left: newq[1] }, 1000,   function(){
+      animateDiv(myclass);
+    });
+
+  };
   </script>
 </body>
 </html>

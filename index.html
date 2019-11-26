@@ -15,12 +15,16 @@
   <script src="js/equipos.js"></script>
   <script src="js/funciones.js"></script>
   <!-- ficheros genericos -->
-  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-3.4.1.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/scripts.js"></script>
 
 </head>
 <body>
+  <!-- SNITCH-->
+  <div id="snitch">
+    <img id="captura-snitch" class="snitch" src="img/snitch.gif" alt="snitch">
+  </div>
 
   <div class="container-fluid">
     <div class="row">
@@ -78,9 +82,11 @@
         </div>
 
         <div class="btn-group" role="group">
-          <button class="btn btn-secondary" type="button">Gol</button>
+          <button id="soltar-snitch" class="btn btn-secondary" type="button">Soltar la snitch</button>
         </div>
       </div>
+
+
 
       <!-- COLUMNA EQUIPO 2 -->
       <div class="col-md-3">
@@ -112,21 +118,21 @@
       var color = "";
       if (equipo == 'gryffindor') {
         equipo = gryffindor;
-        color = 'bg-danger';
+        //color = 'bg-danger';
       } else if (equipo == 'slytherin') {
         equipo = slytherin;
-        color = 'bg-success';
+        //color = 'bg-success';
       } else if (equipo == 'ravenclaw') {
         equipo = ravenclaw;
-        color = 'bg-primary';
+        //color = 'bg-primary';
       } else if (equipo == 'hufflepuff') {
         equipo = hufflepuff;
-        color = 'bg-warning';
+        //color = 'bg-warning';
       }
 
       if (this.name === 'equipo1') {
         $('#equipo1').empty();
-        $('#columna1').addClass(color);
+        //$('#columna1').addClass(color);
 
         //mostrar logo de equipo
         $('#crest1').attr('src', 'img/' + equipo.imagen);
@@ -155,49 +161,78 @@
               '</td><td id="' + player.id + '">' + player.puntos +
               '</td><td><img name="' + player.id + '2" class="quaffle gol" src="img/quaffle.png"></td></tr>');
             }
-        }
+          }
 
-      });
+        });
 
-      $(document).on("click", ".gol", function(){
-        var jugador_id = this.name;
-        var equipo;
-        switch (jugador_id.charAt(0)) {
-          case 'g':
-          equipo = gryffindor;
-          break;
-          case 's':
-          equipo = slytherin;
-          break;
-          case 'r':
-          equipo = ravenclaw;
-          break;
-          case 'h':
-          equipo = hufflepuff;
-          break;
-          default:
-          alert('ID de jugador incorrecto');
-        }
+        $(document).on("click", ".gol", function(){
+          var jugador_id = this.name;
+          var equipo;
+          switch (jugador_id.charAt(0)) {
+            case 'g':
+            equipo = gryffindor;
+            break;
+            case 's':
+            equipo = slytherin;
+            break;
+            case 'r':
+            equipo = ravenclaw;
+            break;
+            case 'h':
+            equipo = hufflepuff;
+            break;
+            default:
+            alert('ID de jugador incorrecto');
+          }
 
-        let players = equipo.jugadores.jugador;
-        let lado_marcador = jugador_id.charAt(2);
-        jugador_id = jugador_id.substring(0, 2);
-        for (var i = 0; i <= players.length - 1; i++) {
-          if (players[i].id === jugador_id) {
-            players[i].puntos += 10;
-            equipo.puntos += 10;
+          let players = equipo.jugadores.jugador;
+          let lado_marcador = jugador_id.charAt(2);
+          jugador_id = jugador_id.substring(0, 2);
+          for (var i = 0; i <= players.length - 1; i++) {
+            if (players[i].id === jugador_id) {
+              players[i].puntos += 10;
+              equipo.puntos += 10;
 
-            //actualizar la vista HTML
-            $('#' + jugador_id).text(players[i].puntos);
-            if (lado_marcador === '1') {
-              $('#marcador1').text(equipo.puntos);
-            } else if (lado_marcador === '2') {
-              $('#marcador2').text(equipo.puntos);
+              //actualizar la vista HTML
+              $('#' + jugador_id).text(players[i].puntos);
+              if (lado_marcador === '1') {
+                $('#marcador1').text(equipo.puntos);
+              } else if (lado_marcador === '2') {
+                $('#marcador2').text(equipo.puntos);
+              }
             }
           }
-        }
+        });
+
+        $('#soltar-snitch').click(function() {
+          $('#snitch').html('<img class="snitch" src="img/snitch.gif" alt="snitch">');
+          soltarSnitch('#snitch');
+        });
+
+        $('#captura-snitch').click(function() {
+          console.log('snitch capturado');
+        });
+
       });
-    });
-    </script>
-  </body>
-  </html>
+
+      function posizioBerria() {
+        var h = $(window).height() - 50;
+        var w = $(window).width() - 50;
+
+        var nh = Math.floor(Math.random() * h);
+        var nw = Math.floor(Math.random() * w);
+
+        return [nh,nw];
+      }
+
+      function soltarSnitch(snitch) {
+        var newq = posizioBerria();
+        $(snitch).animate({ top: newq[0], left: newq[1] }, 1000,   function(){
+          soltarSnitch(snitch);
+        });
+      }
+
+
+      </script>
+    </body>
+    </html>

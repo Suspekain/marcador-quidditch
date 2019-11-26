@@ -5,3 +5,12 @@
 .crest {
   height: 25%;
 }
+
+
+#snitch {
+  position:fixed;
+}
+
+.snitch {
+  width: 100px;
+}
