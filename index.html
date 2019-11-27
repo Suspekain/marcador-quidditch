@@ -137,6 +137,7 @@
 
       if (this.name === 'equipo1') {
         $('#equipo1').empty();
+        $('#equipo1').val(equipo.nombre);
         //$('#columna1').addClass(color);
 
         //mostrar logo de equipo
@@ -154,11 +155,12 @@
 
           //modificar boton de captura de cazador
           $('#cazador1').text(player.nombre);
-          $('#cazador1').attr('name', player.id);
+          $('#cazador1').attr('name', player.id + '1');
 
 
         } else if (this.name === 'equipo2') {
           $('#equipo2').empty();
+          $('#equipo2').val(equipo.nombre);
 
           //mostrar logo de equipo
           $('#crest2').attr('src', 'img/' + equipo.imagen);
@@ -175,7 +177,7 @@
 
             //modificar boton de captura de cazador
             $('#cazador2').text(player.nombre);
-            $('#cazador2').attr('name', player.id);
+            $('#cazador2').attr('name', player.id + '2');
           }
 
         });
@@ -227,14 +229,50 @@
           $('#cazador2').attr('value', 'activo');
         });
 
+        //accion al atrapar la snitch
         $(document).on("click", "#atrapasnitch", function(){
-          if ($('#cazador1').val() === 'activo') {
-            capturador = this.name;
+          var capturador = null;
+          if ($('#cazador1').val() === 'activo' || $('#cazador2').val() === 'activo') {
+            if ($('#cazador1').val() === 'activo') {
+              capturador = $('#cazador1').attr('name');
+            } else if ($('#cazador2').val() === 'activo') {
+              capturador = $('#cazador2').attr('name');
+            }
             console.log(capturador);
+            equipo = equipoJugador(capturador);
+            equipo.puntos += 150;
+
+            let lado_cazador = capturador.charAt(2);
+            console.log(lado_cazador);
+            if (lado_cazador === '1') {
+              $('#marcador1').text(equipo.puntos);
+            } else if (lado_cazador === '2') {
+              $('#marcador2').text(equipo.puntos);
+            }
+            let ganador = null;
+            let puntos = 0;
+
+            console.log($('#marcador1').text());
+            console.log($('#marcador2').text());
+
+            var puntos1 = parseInt($('#marcador1').text());
+            var puntos2 = parseInt($('#marcador2').text());
+
+
+            if (puntos1 === puntos2) {
+              alert('Ha surgido un empate!')
+            } else {
+              if (puntos1 > puntos2) {
+                ganador = equipoJugador($('#equipo1').val());
+              } else if (puntos1 < puntos2) {
+                ganador = equipoJugador($('#equipo2').val());
+              }
+            }
+
+            alert('Final del partido!\n' + ganador.nombre + ' ha ganado con ' + ganador.puntos + ' puntos.')
+          } else {
+            alert("Debes escoger al cazador activo!");
           }
-          console.log(equipoJugador(capturador).nombre);
-          alert('Cazador');
-          console.log('snitch atrapado');
         });
 
 
