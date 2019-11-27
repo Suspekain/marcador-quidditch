@@ -10,7 +10,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
 
-  <!-- Iincludes -->
+  <!-- Includes -->
   <!-- mis ficheros -->
   <script src="js/equipos.js"></script>
   <script src="js/funciones.js"></script>
@@ -22,9 +22,7 @@
 </head>
 <body>
   <!-- SNITCH-->
-  <div id="snitch">
-    <img id="captura-snitch" class="snitch" src="img/snitch.gif" alt="snitch">
-  </div>
+  <div id="snitch"></div>
 
   <div class="container-fluid">
     <div class="row">
@@ -82,7 +80,14 @@
         </div>
 
         <div class="btn-group" role="group">
-          <button id="soltar-snitch" class="btn btn-secondary" type="button">Soltar la snitch</button>
+          <button id="soltar-snitch" class="btn btn-warning" type="button">Soltar la snitch</button>
+        </div>
+        <br>
+        <br>
+        <h6>Que cazador esta cazando?</h6>
+        <div class="btn-group" role="group">
+          <button id="cazador1" name="" value="" class="btn btn-secondary" type="button">Cazador 1</button>
+          <button id="cazador2" name="" value="" class="btn btn-secondary" type="button">Cazador 2</button>
         </div>
       </div>
 
@@ -139,13 +144,19 @@
 
         //mostrar los jugadores del equipo
         for (var i = 0; i <= 6; i++) {
-          let player = equipo.jugadores.jugador[i];
+          var player = equipo.jugadores.jugador[i];
           $('#equipo1').append(
             '<tr><td>' + player.nombre +
             '</td><td>' + player.posicion +
             '</td><td id="' + player.id + '">' + player.puntos +
             '</td><td><img name="' + player.id + '1" class="quaffle gol" src="img/quaffle.png"></td></tr>');
           }
+
+          //modificar boton de captura de cazador
+          $('#cazador1').text(player.nombre);
+          $('#cazador1').attr('name', player.id);
+
+
         } else if (this.name === 'equipo2') {
           $('#equipo2').empty();
 
@@ -154,36 +165,28 @@
 
           //mostrar los jugadores del equipo
           for (var i = 0; i <= 6; i++) {
-            let player = equipo.jugadores.jugador[i];
+            var player = equipo.jugadores.jugador[i];
             $('#equipo2').append(
               '<tr><td>' + player.nombre +
               '</td><td>' + player.posicion +
               '</td><td id="' + player.id + '">' + player.puntos +
               '</td><td><img name="' + player.id + '2" class="quaffle gol" src="img/quaffle.png"></td></tr>');
             }
+
+            //modificar boton de captura de cazador
+            $('#cazador2').text(player.nombre);
+            $('#cazador2').attr('name', player.id);
           }
 
         });
 
+
+
         $(document).on("click", ".gol", function(){
           var jugador_id = this.name;
           var equipo;
-          switch (jugador_id.charAt(0)) {
-            case 'g':
-            equipo = gryffindor;
-            break;
-            case 's':
-            equipo = slytherin;
-            break;
-            case 'r':
-            equipo = ravenclaw;
-            break;
-            case 'h':
-            equipo = hufflepuff;
-            break;
-            default:
-            alert('ID de jugador incorrecto');
-          }
+          equipo = equipoJugador(this.name);
+
 
           let players = equipo.jugadores.jugador;
           let lado_marcador = jugador_id.charAt(2);
@@ -204,16 +207,56 @@
           }
         });
 
+        //SOLTAR Y CAPTURAR SNITCH
         $('#soltar-snitch').click(function() {
-          $('#snitch').html('<img class="snitch" src="img/snitch.gif" alt="snitch">');
+          $('#snitch').html('<img id="atrapasnitch" class="snitch" src="img/snitch.png">');
           soltarSnitch('#snitch');
         });
 
-        $('#captura-snitch').click(function() {
-          console.log('snitch capturado');
+        //botones para elegir cazador activo
+        $('#cazador1').click(function() {
+          $('#cazador2').attr('class', 'btn btn-secondary');
+          $('#cazador1').attr('class', 'btn');
+          $('#cazador2').attr('value', '');
+          $('#cazador1').attr('value', 'activo');
+        });
+        $('#cazador2').click(function() {
+          $('#cazador1').attr('class', 'btn btn-secondary');
+          $('#cazador2').attr('class', 'btn');
+          $('#cazador1').attr('value', '');
+          $('#cazador2').attr('value', 'activo');
         });
 
+        $(document).on("click", "#atrapasnitch", function(){
+          if ($('#cazador1').val() === 'activo') {
+            capturador = this.name;
+            console.log(capturador);
+          }
+          console.log(equipoJugador(capturador).nombre);
+          alert('Cazador');
+          console.log('snitch atrapado');
+        });
+
+
       });
+      function equipoJugador(id) {
+        switch (id.charAt(0)) {
+          case 'g':
+          return gryffindor;
+          break;
+          case 's':
+          return slytherin;
+          break;
+          case 'r':
+          return ravenclaw;
+          break;
+          case 'h':
+          return hufflepuff;
+          break;
+          default:
+          alert('ID de jugador incorrecto');
+        }
+      }
 
       function posizioBerria() {
         var h = $(window).height() - 50;
@@ -231,7 +274,6 @@
           soltarSnitch(snitch);
         });
       }
-
 
       </script>
     </body>
